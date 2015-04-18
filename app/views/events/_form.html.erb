@@ -1,0 +1,35 @@
+<%= form_for(@event) do |f| %>
+  <% if @event.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+      <ul>
+      <% @event.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <% Time.use_zone("Hawaii") do %>
+    <%= f.label :start %><br>
+    <%= f.datetime_select :start, {minute_step: 15} %>
+  </div>
+  <div class="field">
+    <%= f.label :finish %><br>
+    <%= f.datetime_select :finish, {minute_step: 15} %>
+    <% end %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :track %><br>
+    <%= f.select :track, options_for_select(['Track 1', 'Track 2', 'Track 3', 'Track 4', 'Track 5', 'Break'] )%>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
